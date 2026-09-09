@@ -3,12 +3,12 @@
 class Cell{
   public:
   Cell();
-  Cell(int * iValue, int iRow, int iColumn);
+  Cell(int iValue, int iRow, int iColumn);
   ~Cell();
 
-  void setValue(int * iValue);
+  void setValue(int iValue);
   void resetValue();
-  int * getValue();
+  int getValue();
   int getRow();
   int getColumn();
 
@@ -17,7 +17,7 @@ class Cell{
 
   private:
 
-  int * mValue;
+  int mValue;
   int mRow;
   int mColumn;
 };
