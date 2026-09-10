@@ -11,7 +11,7 @@ Sudoku::Sudoku()
   {
     for (int column = 0; column < 9; column++)
     {
-      mCells[row][column] = new Cell{0, row, column};
+      mBoard[row][column] = new Cell{0, row, column};
       mOriginalBoard[row][column] = new Cell{0, row, column};
     }
   }
@@ -28,7 +28,7 @@ Sudoku::Sudoku(std::array<std::array<int, 9>, 9> iCells)
   {
     for (int column = 0; column < 9; column++)
     {
-      mCells[row][column] = new Cell{iCells[row][column], row, column};
+      mBoard[row][column] = new Cell{iCells[row][column], row, column};
       mOriginalBoard[row][column] = new Cell{iCells[row][column], row, column};
     }
   }
@@ -40,7 +40,7 @@ Sudoku::Sudoku(std::array<std::array<Cell, 9>, 9> iCells)
   {
     for (int column = 0; column < 9; column++)
     {
-      mCells[row][column] = new Cell{iCells[row][column]};
+      mBoard[row][column] = new Cell{iCells[row][column]};
     }
   }
 }
@@ -65,7 +65,7 @@ void Sudoku::coutBoard()
       {
         std::cout << "| ";
       }
-      std::cout << mCells[row][column]->value << " ";
+      std::cout << mBoard[row][column]->value << " ";
     } 
     std::cout << "|\n";
   }
@@ -114,12 +114,12 @@ void Sudoku::randomizeValues()
 
 Sudoku::Cell* Sudoku::getCell(int iRow, int iColumn)
 {
-  return mCells[iRow][iColumn];
+  return mBoard[iRow][iColumn];
 }
 
 std::optional<Sudoku::Cell*> Sudoku::getFistEmptyCell()
 {
-  for (std::array<Cell*, 9> mRow : mCells)
+  for (std::array<Cell*, 9> mRow : mBoard)
   {
     for (Cell* mCell : mRow)
     {
@@ -137,13 +137,13 @@ bool Sudoku::rowConforms(int iRow)
   std::vector<int> rowValues;
   for (int column = 0; column < 9; column++)
   {
-    if (std::find(rowValues.begin(), rowValues.end(), mCells[iRow][column]->value) != rowValues.end())
+    if (std::find(rowValues.begin(), rowValues.end(), mBoard[iRow][column]->value) != rowValues.end())
     {
       return false;
     }
-    if (mCells[iRow][column]->value != 0)
+    if (mBoard[iRow][column]->value != 0)
     {
-      rowValues.emplace_back(mCells[iRow][column]->value);
+      rowValues.emplace_back(mBoard[iRow][column]->value);
     }
   }
   return true;
@@ -153,7 +153,7 @@ bool Sudoku::rowWillConform(Cell* iChangedCell, int iValue)
 {
   for (int column = 0; column < 9; column++)
   {
-    if (iValue == mCells[iChangedCell->row][column]->value &&
+    if (iValue == mBoard[iChangedCell->row][column]->value &&
         iValue != 0)
     {
       return false;
@@ -167,13 +167,13 @@ bool Sudoku::columnConforms(int iColumn)
   std::vector<int> columnValues;
   for (int row = 0; row < 9; row++)
   {
-    if (std::find(columnValues.begin(), columnValues.end(), mCells[row][iColumn]->value) != columnValues.end())
+    if (std::find(columnValues.begin(), columnValues.end(), mBoard[row][iColumn]->value) != columnValues.end())
     {
       return false;
     }
-    if (mCells[row][iColumn]->value != 0)
+    if (mBoard[row][iColumn]->value != 0)
     {
-      columnValues.emplace_back(mCells[row][iColumn]->value);
+      columnValues.emplace_back(mBoard[row][iColumn]->value);
     }
   }
   return true;
@@ -183,7 +183,7 @@ bool Sudoku::columnWillConform(Cell* iChangedCell, int iValue)
 {
   for (int row = 0; row < 9; row++)
   {
-    if (iValue == mCells[row][iChangedCell->column]->value &&
+    if (iValue == mBoard[row][iChangedCell->column]->value &&
         iValue != 0)
     {
       return false;
@@ -201,13 +201,13 @@ bool Sudoku::boxConforms(int iBox)
   {
     for (int column = 0; column < 3; column++)
     {
-      if (std::find(boxValues.begin(), boxValues.end(), mCells[BoxStartRow + row][BoxStartColumn + column]->value) != boxValues.end())
+      if (std::find(boxValues.begin(), boxValues.end(), mBoard[BoxStartRow + row][BoxStartColumn + column]->value) != boxValues.end())
       {
         return false;
       }
-      if (mCells[BoxStartRow + row][BoxStartColumn + column]->value != 0)
+      if (mBoard[BoxStartRow + row][BoxStartColumn + column]->value != 0)
       {
-        boxValues.emplace_back(mCells[BoxStartRow + row][BoxStartColumn + column]->value);
+        boxValues.emplace_back(mBoard[BoxStartRow + row][BoxStartColumn + column]->value);
       }
     }
   }
@@ -222,7 +222,7 @@ bool Sudoku::boxWillConform(Cell* iChangedCell, int iValue)
   {
     for (int column = 0; column < 3; column++)
     {
-      if (iValue == mCells[BoxStartRow + row][BoxStartColumn + column]->value &&
+      if (iValue == mBoard[BoxStartRow + row][BoxStartColumn + column]->value &&
           iValue != 0)
       {
         return false;
@@ -259,7 +259,7 @@ Sudoku::Cell* Sudoku::incrementCell(Cell* iCell)
     outputCellRow++;
   }
   outputCellColumn++;
-  return mCells[outputCellRow][outputCellColumn];
+  return mBoard[outputCellRow][outputCellColumn];
 }
 
 Sudoku::Cell* Sudoku::decrementCell(Cell* iCell)
@@ -272,7 +272,7 @@ Sudoku::Cell* Sudoku::decrementCell(Cell* iCell)
     outputCellRow--;
   }
   outputCellColumn--;
-  return mCells[outputCellRow][outputCellColumn];
+  return mBoard[outputCellRow][outputCellColumn];
 }
 
 void Sudoku::solveBoard()

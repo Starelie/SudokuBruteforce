@@ -43,7 +43,7 @@ class Sudoku {
 
   private:
 
-  std::array<std::array<Cell*, 9>, 9> mCells;
+  std::array<std::array<Cell*, 9>, 9> mBoard;
   std::array<std::array<Cell*, 9>, 9> mOriginalBoard;
 
   std::array<int, 9> possibleValues = {1, 2, 3, 4, 5, 6, 7, 8, 9};
