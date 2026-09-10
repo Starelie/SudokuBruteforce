@@ -1,5 +1,6 @@
 #include <vector>
 #include <array>
+#include <optional>
 
 class Sudoku {
   public:
@@ -9,18 +10,21 @@ class Sudoku {
     int value = 0;
     int row = 0;
     int column = 0;
+
+    void coutCell();
   };
 
   Sudoku();
   Sudoku(std::array<std::array<int, 9>, 9> iCells);
   ~Sudoku();
 
-  void solveBoard(int iValuePosition,int iCurrentLoop = 0);
-  void generateBoard(Cell* iCell, int iValuePosition, int iCurrentLoop = 0);
+  void solveBoard(int iValuePosition = 0, int iCurrentLoop = 0);
+  void generateBoard(Cell* iCell, int iValuePosition = 0, int iCurrentLoop = 0);
   void coutBoard();
 
   void randomizeValues();
-  Cell* getFistEmptyCell();
+  std::optional<Cell*> getFistEmptyCell();
+  Cell* getCell(int iRow, int iColumn);
 
   Cell* incrementCell(Cell* iCell);
   Cell* decrementCell(Cell* iCell);

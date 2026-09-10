@@ -30,5 +30,15 @@ int main()
               << "| Box no" << i << " : " << sudokuBoard.boxConforms(i) << "\n";
   }
   std::cout << "The whole board : " << sudokuBoard.boardConforms() << "\n";
+  sudokuBoard.getCell(0,0)->value = 0;
+  std::cout << "Finding the first empty cell, if it exists : ";
+  if (sudokuBoard.getFistEmptyCell())
+  {
+    sudokuBoard.getFistEmptyCell().value()->coutCell();
+  }
+  else {std::cout << "X\n";}
+  sudokuBoard.getCell(0,0)->value = 1;
+  //sudokuBoard.solveBoard();
+  //sudokuBoard.coutBoard();
   return 0;
 }
