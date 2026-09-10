@@ -14,7 +14,6 @@ Sudoku::Sudoku()
       mCells[row][column] = new Cell{0, row, column};
     }
   }
-  randomizeValues();
 }
 
 void Sudoku::Cell::coutCell()
@@ -31,7 +30,17 @@ Sudoku::Sudoku(std::array<std::array<int, 9>, 9> iCells)
       mCells[row][column] = new Cell{iCells[row][column], row, column};
     }
   }
-  randomizeValues();
+}
+
+Sudoku::Sudoku(std::array<std::array<Cell, 9>, 9> iCells) 
+{
+  for (int row = 0; row < 9; row++)
+  {
+    for (int column = 0; column < 9; column++)
+    {
+      mCells[row][column] = new Cell{iCells[row][column]};
+    }
+  }
 }
 
 Sudoku::~Sudoku() {}
@@ -69,7 +78,7 @@ void Sudoku::randomizeValues()
 {
   std::random_device rd;
   std::mt19937 g(rd());
-  std::shuffle(std::begin(possibleValues), std::end(possibleValues), g);
+  std::shuffle(possibleValues.begin(), possibleValues.end(), g);
 }
 
 Sudoku::Cell* Sudoku::getCell(int iRow, int iColumn)
@@ -235,7 +244,7 @@ Sudoku::Cell* Sudoku::decrementCell(Cell* iCell)
   return mCells[outputCellRow][outputCellColumn];
 }
 
-void Sudoku::solveBoard(int iValuePosition, int iCurrentLoop)
+void Sudoku::solveBoard()
 {
   std::cout << "solving...\n";
 }
