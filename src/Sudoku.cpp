@@ -41,6 +41,7 @@ Sudoku::Sudoku(std::array<std::array<Cell, 9>, 9> iCells)
     for (int column = 0; column < 9; column++)
     {
       mBoard[row][column] = new Cell{iCells[row][column]};
+      mOriginalBoard[row][column] = new Cell{iCells[row][column]};
     }
   }
 }
