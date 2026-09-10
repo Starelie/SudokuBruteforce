@@ -5,7 +5,7 @@
 #include <vector>
 #include <array>
 
-#include "Cell.h"
+#include "Cell.hpp"
 
 class Sudoku {
   public:

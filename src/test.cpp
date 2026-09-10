@@ -2,7 +2,7 @@
 #include <vector>
 #include <array>
 
-#include "Sudoku.h"
+#include "Sudoku.hpp"
 
 int main()
 {
