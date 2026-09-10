@@ -38,6 +38,17 @@ int main()
   }
   else {std::cout << "X\n";}
   sudokuBoard.getCell(0,0)->value = 1;
+  std::array<std::array<Sudoku::Cell*, 9>, 9> testBoard;
+  for (int i = 0; i < 9; i++)
+  {
+    for (int j = 0; j < 9; j++)
+    {
+      Sudoku::Cell* cell = sudokuBoard.getCell(i, j);
+      testBoard[i][j] = new Sudoku::Cell{cell->value, cell->row, cell->column};
+    }
+  }
+  testBoard[8][8]->value = 0;
+  Sudoku::coutBoard(testBoard);
   //sudokuBoard.solveBoard();
   //sudokuBoard.coutBoard();
   return 0;
