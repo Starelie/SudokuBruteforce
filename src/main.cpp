@@ -1,4 +1,5 @@
 #include <array>
+#include <iostream>
 
 #include "Sudoku.hpp"
 
@@ -30,6 +31,9 @@ int main()
   //  {{0,0,0,0,0,0,0,0,0}}
   //}};
 
-  //Sudoku sudokuBoard{CellsValues};
+  std::cout << "Cell values declared\n";
+  Sudoku sudokuBoard{CellsValues};
+  std::cout << "Sudoku object created\n";
+  sudokuBoard.coutBoard();
   return 0;
 }

@@ -14,9 +14,8 @@ Sudoku::Sudoku()
       mCells[row][column] = new Cell{0, row, column};
     }
   }
-  // randomizeValues();
+  randomizeValues();
   // generateBoard(mCells[0][0], 0, 0);
-  coutBoard();
 }
 
 Sudoku::Sudoku(std::array<std::array<int, 9>, 9> iCells) 
@@ -28,12 +27,8 @@ Sudoku::Sudoku(std::array<std::array<int, 9>, 9> iCells)
       mCells[row][column] = new Cell{iCells[row][column], row, column};
     }
   }
-  for (int i = 1; i <= 9; i++)
-  {
-    possibleValues[i - 1] = i;
-  }
-  solveBoard(0, 0);
-  coutBoard();
+  randomizeValues();
+  //solveBoard(0, 0);
 }
 
 Sudoku::~Sudoku() {}
@@ -44,28 +39,27 @@ void Sudoku::coutBoard()
   {
     if (row % 3 == 0)
     {
-      std::cout << std::endl;
-      for (int i = 0; i < 31; i++)
+      for (int i = 0; i < 25; i++)
       {
         std::cout << "-";
       }
+      std::cout << "\n";
     }
-    std::cout << std::endl;
     for (int column = 0; column < 9; column++)
     {
       if (column % 3 == 0)
       {
-        std::cout << "|";
+        std::cout << "| ";
       }
-      std::cout << mCells[row][column]->value;
+      std::cout << mCells[row][column]->value << " ";
     } 
-    std::cout << "|";
+    std::cout << "|\n";
   }
-  std::cout << std::endl;
-  for (int i = 0; i < 31; i++)
+  for (int i = 0; i < 25; i++)
   {
     std::cout << "-";
   }
+  std::cout << "\n";
 }
 
 void Sudoku::randomizeValues()

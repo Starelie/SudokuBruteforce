@@ -18,15 +18,15 @@ int main()
     {{5,6,7,8,9,1,2,3,4}}
   }};
 
-  for (unsigned int i = 0; i < SudokuValues.size(); i++)
-  {
-    for (unsigned int j = 0; j < SudokuValues[0].size(); j++)
-      {
-        std::cout << SudokuValues[i][j] << " ";
-      }
-    std::cout << "\n";
-  }
-
-  //Sudoku sudokuBoard{SudokuValues};
+  std::cout << "Cell values declared\n";
+  Sudoku sudokuBoard{SudokuValues};
+  std::cout << "Sudoku object created\n";
+  sudokuBoard.coutBoard();
+  //for (int i = 0; i < 9; i++)
+  //{
+  //  for (int j = 0; j < 9; j++)
+  //  {
+  //  }
+  //}
   return 0;
 }

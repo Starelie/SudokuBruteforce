@@ -6,9 +6,9 @@ class Sudoku {
 
   struct Cell
   {
-    int value;
-    int column;
-    int row;
+    int value = 0;
+    int row = 0;
+    int column = 0;
   };
 
   Sudoku();
@@ -36,5 +36,5 @@ class Sudoku {
 
   std::vector<Cell*> mChangedCells;
 
-  int possibleValues[9];
+  std::array<int, 9> possibleValues = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 };
