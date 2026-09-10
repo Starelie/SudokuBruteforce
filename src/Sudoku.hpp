@@ -22,6 +22,7 @@ class Sudoku {
   void solveBoard();
   void generateBoard();
   void coutBoard();
+  static void coutBoard(std::array<std::array<Cell*, 9>, 9> iBoard);
 
   void randomizeValues();
 
@@ -32,19 +33,18 @@ class Sudoku {
   Cell* decrementCell(Cell* iCell);
 
   bool rowConforms(int iRow);
-  bool rowSafe(Cell* iCell, int iValue);
+  bool rowWillConform(Cell* iChangedCell, int iValue);
   bool columnConforms(int iColumn);
-  bool columnSafe(Cell* iCell, int iValue);
+  bool columnWillConform(Cell* iChangedCell, int iValue);
   bool boxConforms(int iBox); // From left to right, top to bottom
-  bool boxSafe(Cell* iCell, int iValue);
+  bool boxWillConform(Cell* iChangedCell, int iValue);
   bool boardConforms();
-  bool safeToPlace(Cell* iCell, int iValue);
+  bool safeToPlace(Cell* iChangedCell, int iValue);
 
   private:
 
   std::array<std::array<Cell*, 9>, 9> mCells;
-
-  std::vector<Cell*> mChangedCells;
+  std::array<std::array<Cell*, 9>, 9> mOriginalBoard;
 
   std::array<int, 9> possibleValues = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 };
