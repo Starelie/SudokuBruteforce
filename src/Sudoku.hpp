@@ -1,10 +1,16 @@
 #include <vector>
 #include <array>
 
-#include "Cell.hpp"
-
 class Sudoku {
   public:
+
+  struct Cell
+  {
+    int value;
+    int column;
+    int row;
+  };
+
   Sudoku();
   Sudoku(std::array<std::array<int, 9>, 9> iCells);
   ~Sudoku();
@@ -18,7 +24,6 @@ class Sudoku {
 
   Cell* incrementCell(Cell* iCell);
   Cell* decrementCell(Cell* iCell);
-
 
   bool rowSafe(Cell* iCell, int iValue);
   bool columnSafe(Cell* iCell, int iValue);
