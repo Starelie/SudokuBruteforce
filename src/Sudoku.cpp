@@ -77,7 +77,7 @@ void Sudoku::coutBoard()
   std::cout << "\n";
 }
 
-static void coutBoard(std::array<std::array<Sudoku::Cell*, 9>, 9> iBoard)
+void Sudoku::coutBoard(std::array<std::array<Sudoku::Cell*, 9>, 9> iBoard)
 {
   for (int row = 0; row < 9; row++)
   {
