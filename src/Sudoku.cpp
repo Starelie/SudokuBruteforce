@@ -86,6 +86,23 @@ Sudoku::Cell* Sudoku::getFistEmptyCell()
   return emptyCell;
 }
 
+bool Sudoku::rowConforms(int iRow)
+{
+  std::vector<int> rowValues;
+  for (int column = 0; column < 9; column++)
+  {
+    if (std::find(rowValues.begin(), rowValues.end(), mCells[iRow][column]->value) != rowValues.end())
+    {
+      return false;
+    }
+    if (mCells[iRow][column]->value != 0)
+    {
+      rowValues.emplace_back(mCells[iRow][column]->value);
+    }
+  }
+  return true;
+}
+
 bool Sudoku::rowSafe(Cell* iCell, int iValue)
 {
   for (int column = 0; column < 9; column++)
@@ -94,6 +111,23 @@ bool Sudoku::rowSafe(Cell* iCell, int iValue)
         iValue != 0)
     {
       return false;
+    }
+  }
+  return true;
+}
+
+bool Sudoku::columnConforms(int iColumn)
+{
+  std::vector<int> columnValues;
+  for (int row = 0; row < 9; row++)
+  {
+    if (std::find(columnValues.begin(), columnValues.end(), mCells[row][iColumn]->value) != columnValues.end())
+    {
+      return false;
+    }
+    if (mCells[row][iColumn]->value != 0)
+    {
+      columnValues.emplace_back(mCells[row][iColumn]->value);
     }
   }
   return true;
@@ -112,19 +146,53 @@ bool Sudoku::columnSafe(Cell* iCell, int iValue)
   return true;
 }
 
-bool Sudoku::boxSafe(Cell* iCell, int iValue)
+bool Sudoku::boxConforms(int iBox)
 {
-  int BoxStartX = iCell->row - iCell->row % 3;
-  int BoxStartY = iCell->column - iCell->column % 3;
+  std::vector<int> boxValues;
+  int BoxStartRow = 3 * (iBox % 3);
+  int BoxStartColumn = 3 * int(iBox / 3);
   for (int row = 0; row < 3; row++)
   {
     for (int column = 0; column < 3; column++)
     {
-      if (iValue == mCells[BoxStartX + row][BoxStartY + column]->value &&
+      if (std::find(boxValues.begin(), boxValues.end(), mCells[BoxStartRow + row][BoxStartColumn + column]->value) != boxValues.end())
+      {
+        return false;
+      }
+      if (mCells[BoxStartRow + row][BoxStartColumn + column]->value != 0)
+      {
+        boxValues.emplace_back(mCells[BoxStartRow + row][BoxStartColumn + column]->value);
+      }
+    }
+  }
+  return true;
+}
+
+bool Sudoku::boxSafe(Cell* iCell, int iValue)
+{
+  int BoxStartRow = iCell->row - iCell->row % 3;
+  int BoxStartColumn = iCell->column - iCell->column % 3;
+  for (int row = 0; row < 3; row++)
+  {
+    for (int column = 0; column < 3; column++)
+    {
+      if (iValue == mCells[BoxStartRow + row][BoxStartColumn + column]->value &&
           iValue != 0)
       {
         return false;
       }
+    }
+  }
+  return true;
+}
+
+bool Sudoku::boardConforms()
+{
+  for (int i = 0; i < 9; i++)
+  {
+    if (!(rowConforms(i) && columnConforms(i) && boxConforms(i)))
+    {
+      return false;
     }
   }
   return true;

@@ -22,11 +22,13 @@ int main()
   Sudoku sudokuBoard{SudokuValues};
   std::cout << "Sudoku object created\n";
   sudokuBoard.coutBoard();
-  //for (int i = 0; i < 9; i++)
-  //{
-  //  for (int j = 0; j < 9; j++)
-  //  {
-  //  }
-  //}
+  // Check if the test board conforms to the rules of sudoku
+  for (int i = 0; i < 9; i++)
+  {
+    std::cout << "Row no" << i << " : " << sudokuBoard.rowConforms(i) 
+              << "| Column no" << i << " : " << sudokuBoard.columnConforms(i) 
+              << "| Box no" << i << " : " << sudokuBoard.boxConforms(i) << "\n";
+  }
+  std::cout << "The whole board : " << sudokuBoard.boardConforms() << "\n";
   return 0;
 }

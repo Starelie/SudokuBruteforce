@@ -25,9 +25,13 @@ class Sudoku {
   Cell* incrementCell(Cell* iCell);
   Cell* decrementCell(Cell* iCell);
 
+  bool rowConforms(int iRow);
   bool rowSafe(Cell* iCell, int iValue);
+  bool columnConforms(int iColumn);
   bool columnSafe(Cell* iCell, int iValue);
+  bool boxConforms(int iBox); // From left to right, top to bottom
   bool boxSafe(Cell* iCell, int iValue);
+  bool boardConforms();
   bool safeToPlace(Cell* iCell, int iValue);
 
   private:
