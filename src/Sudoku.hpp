@@ -3,8 +3,7 @@
 #include <optional>
 
 class Sudoku {
-  public:
-
+ public:
   struct Cell
   {
     int value = 0;
@@ -28,6 +27,8 @@ class Sudoku {
 
   std::optional<Cell*> getFistEmptyCell();
   Cell* getCell(int iRow, int iColumn);
+  std::array<std::array<Cell*, 9>, 9> getBoard();
+  std::array<std::array<Cell*, 9>, 9> getOriginalBoard();
 
   Cell* incrementCell(Cell* iCell);
   Cell* decrementCell(Cell* iCell);
@@ -41,8 +42,7 @@ class Sudoku {
   bool boardConforms();
   bool safeToPlace(Cell* iChangedCell, int iValue);
 
-  private:
-
+ private:
   std::array<std::array<Cell*, 9>, 9> mBoard;
   std::array<std::array<Cell*, 9>, 9> mOriginalBoard;
 

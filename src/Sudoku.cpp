@@ -133,6 +133,16 @@ std::optional<Sudoku::Cell*> Sudoku::getFistEmptyCell()
   return {};
 }
 
+std::array<std::array<Sudoku::Cell*, 9>, 9> Sudoku::getBoard()
+{
+  return mBoard;
+}
+
+std::array<std::array<Sudoku::Cell*, 9>, 9> Sudoku::getOriginalBoard()
+{
+  return mOriginalBoard;
+}
+
 bool Sudoku::rowConforms(int iRow)
 {
   std::vector<int> rowValues;
