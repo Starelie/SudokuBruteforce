@@ -1,4 +1,6 @@
-#include "Cell.h"
+#include "Cell.hpp"
+
+#include <iostream>
 
 Cell::Cell() {mValue = 0; mRow = 0; mColumn = 0;}
 

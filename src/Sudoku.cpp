@@ -1,4 +1,9 @@
-#include "sudoku.h"
+#include <iostream>
+#include <algorithm>
+#include <random>
+#include <cmath>
+
+#include "Sudoku.hpp"
 
 Sudoku::Sudoku() 
 {

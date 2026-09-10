@@ -1,7 +1,3 @@
-#include <iostream>
-#include <algorithm>
-#include <random>
-#include <cmath>
 #include <vector>
 #include <array>
 
