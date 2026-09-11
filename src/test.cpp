@@ -25,9 +25,9 @@ int main()
   // Check if the test board conforms to the rules of sudoku
   for (int i = 0; i < 9; i++)
   {
-    std::cout << "Row no" << i << " : " << sudokuBoard.rowConforms(i) 
-              << "| Column no" << i << " : " << sudokuBoard.columnConforms(i) 
-              << "| Box no" << i << " : " << sudokuBoard.boxConforms(i) << "\n";
+    std::cout << "Row no" << i + 1 << " : " << sudokuBoard.rowConforms(i) 
+              << " | Column no" << i + 1 << " : " << sudokuBoard.columnConforms(i) 
+              << " | Box no" << i + 1 << " : " << sudokuBoard.boxConforms(i) << "\n";
   }
   std::cout << "The whole board : " << sudokuBoard.boardConforms() << "\n";
   sudokuBoard.getCell(0,0)->value = 0;

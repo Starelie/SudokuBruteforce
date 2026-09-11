@@ -50,45 +50,19 @@ Sudoku::~Sudoku() {}
 
 void Sudoku::coutBoard()
 {
-  for (int row = 0; row < 9; row++)
-  {
-    if (row % 3 == 0)
-    {
-      for (int i = 0; i < 25; i++)
-      {
-        std::cout << "-";
-      }
-      std::cout << "\n";
-    }
-    for (int column = 0; column < 9; column++)
-    {
-      if (column % 3 == 0)
-      {
-        std::cout << "| ";
-      }
-      std::cout << mBoard[row][column]->value << " ";
-    } 
-    std::cout << "|\n";
-  }
-  for (int i = 0; i < 25; i++)
-  {
-    std::cout << "-";
-  }
-  std::cout << "\n";
+  coutBoard(mBoard);
 }
 
 void Sudoku::coutBoard(std::array<std::array<Sudoku::Cell*, 9>, 9> iBoard)
 {
+  std::cout << "-----------------------------\n|   | 1 2 3 | 4 5 6 | 7 8 9 |\n";
   for (int row = 0; row < 9; row++)
   {
     if (row % 3 == 0)
     {
-      for (int i = 0; i < 25; i++)
-      {
-        std::cout << "-";
-      }
-      std::cout << "\n";
+      std::printf("----%u-------%u-------%u--------\n", 1 + 3 * (row / 3), 2 + 3 * (row / 3), 3 + 3 * (row / 3));
     }
+    std::cout << "| " << row + 1 << " ";
     for (int column = 0; column < 9; column++)
     {
       if (column % 3 == 0)
@@ -99,11 +73,7 @@ void Sudoku::coutBoard(std::array<std::array<Sudoku::Cell*, 9>, 9> iBoard)
     } 
     std::cout << "|\n";
   }
-  for (int i = 0; i < 25; i++)
-  {
-    std::cout << "-";
-  }
-  std::cout << "\n";
+  std::cout << "-----------------------------\n";
 }
 
 void Sudoku::randomizeValues()
@@ -207,7 +177,7 @@ bool Sudoku::boxConforms(int iBox)
 {
   std::vector<int> boxValues;
   int BoxStartRow = 3 * (iBox % 3);
-  int BoxStartColumn = 3 * int(iBox / 3);
+  int BoxStartColumn = 3 * (iBox / 3);
   for (int row = 0; row < 3; row++)
   {
     for (int column = 0; column < 3; column++)
