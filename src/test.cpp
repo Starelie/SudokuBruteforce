@@ -3,6 +3,42 @@
 
 #include "Sudoku.hpp"
 
+void TestConformityFunctions(Sudoku iSudokuBoard)
+{
+  // Check if the test board conforms to the rules of sudoku
+  for (int i = 0; i < 9; i++)
+  {
+    std::cout << "Row no" << i + 1 << " : " << iSudokuBoard.rowConforms(i) 
+              << " | Column no" << i + 1 << " : " << iSudokuBoard.columnConforms(i) 
+              << " | Box no" << i + 1 << " : " << iSudokuBoard.boxConforms(i) << "\n";
+  }
+  std::cout << "The whole board : " << iSudokuBoard.boardConforms() << "\n";
+}
+
+void TestGetFirstEmptyCellFunction(Sudoku iSudokuBoard, int iTestedRow = 0, int iTestedColumn = 0)
+{
+  int wCellValue = iSudokuBoard.getCell(iTestedRow, iTestedColumn)->value;
+  iSudokuBoard.getCell(iTestedRow, iTestedColumn)->value = 0;
+  std::cout << "Finding the first empty cell, if it exists : ";
+  if (iSudokuBoard.getFistEmptyCell())
+  {
+    iSudokuBoard.getFistEmptyCell().value()->coutCell();
+  }
+  else {std::cout << "X\n";}
+  iSudokuBoard.getCell(iTestedRow, iTestedColumn)->value = wCellValue;
+}
+
+void TestCoutBoard(Sudoku iSudokuBoard)
+{
+  iSudokuBoard.coutBoard();
+}
+
+void TestSolveBoard(Sudoku iSudokuBoard)
+{
+  iSudokuBoard.solveBoard();
+  iSudokuBoard.coutBoard();
+}
+
 int main()
 {
   std::array<std::array<int, 9>, 9> SudokuValues =
@@ -21,35 +57,5 @@ int main()
   std::cout << "Cell values declared\n";
   Sudoku sudokuBoard{SudokuValues};
   std::cout << "Sudoku object created\n";
-  sudokuBoard.coutBoard();
-  // Check if the test board conforms to the rules of sudoku
-  for (int i = 0; i < 9; i++)
-  {
-    std::cout << "Row no" << i + 1 << " : " << sudokuBoard.rowConforms(i) 
-              << " | Column no" << i + 1 << " : " << sudokuBoard.columnConforms(i) 
-              << " | Box no" << i + 1 << " : " << sudokuBoard.boxConforms(i) << "\n";
-  }
-  std::cout << "The whole board : " << sudokuBoard.boardConforms() << "\n";
-  sudokuBoard.getCell(0,0)->value = 0;
-  std::cout << "Finding the first empty cell, if it exists : ";
-  if (sudokuBoard.getFistEmptyCell())
-  {
-    sudokuBoard.getFistEmptyCell().value()->coutCell();
-  }
-  else {std::cout << "X\n";}
-  sudokuBoard.getCell(0,0)->value = 1;
-  std::array<std::array<Sudoku::Cell*, 9>, 9> testBoard;
-  for (int i = 0; i < 9; i++)
-  {
-    for (int j = 0; j < 9; j++)
-    {
-      Sudoku::Cell* cell = sudokuBoard.getCell(i, j);
-      testBoard[i][j] = new Sudoku::Cell{cell->value, cell->row, cell->column};
-    }
-  }
-  testBoard[8][8]->value = 0;
-  Sudoku::coutBoard(testBoard);
-  //sudokuBoard.solveBoard();
-  //sudokuBoard.coutBoard();
   return 0;
 }
